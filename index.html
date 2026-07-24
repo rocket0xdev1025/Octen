@@ -258,6 +258,16 @@
       background: rgba(0, 20, 10, 0.85);
       border: 1px solid rgba(0, 255, 102, 0.35);
       box-shadow: inset 0 0 30px rgba(0, 255, 102, 0.06), 0 0 20px rgba(0, 255, 102, 0.1);
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .ca-box code {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     /* Scanline overlay */
@@ -483,7 +493,7 @@
         </div>
 
         <!-- Hero copy + CTAs -->
-        <div class="reveal space-y-6">
+        <div class="reveal space-y-6 min-w-0">
           <div class="drama-quote rounded-r-xl pl-5 pr-4 py-4">
             <p class="text-lg sm:text-xl md:text-2xl font-extrabold leading-snug neon-text">
               “Wrong coin at $40K — check the commits.”
@@ -518,13 +528,13 @@
           </div>
 
           <!-- Contract Address -->
-          <div class="ca-box rounded-2xl p-4 sm:p-5">
-            <div class="flex items-center justify-between gap-2 mb-2">
+          <div class="ca-box rounded-2xl p-4 sm:p-5 w-full max-w-full">
+            <div class="flex items-center justify-between gap-2 mb-2 min-w-0">
               <span class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-neon-500">Contract Address</span>
-              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neon-500/15 text-neon-400 border border-neon-500/30">Solana</span>
+              <span class="shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neon-500/15 text-neon-400 border border-neon-500/30">Solana</span>
             </div>
-            <div class="flex items-center gap-2 sm:gap-3">
-              <code id="ca-text" class="flex-1 text-xs sm:text-sm font-mono text-neon-100/90 truncate select-all">7z4cgsb7egGx4iWXioU5agYP2cU5tyoXZakSCxafpump</code>
+            <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+              <code id="ca-text" class="flex-1 min-w-0 text-xs sm:text-sm font-mono text-neon-100/90 truncate select-all">7z4cgsb7egGx4iWXioU5agYP2cU5tyoXZakSCxafpump</code>
               <button id="copy-btn" type="button"
                       class="shrink-0 btn-outline-neon px-3.5 py-2 rounded-xl text-xs uppercase flex items-center gap-1.5"
                       aria-label="Copy contract address">
@@ -586,23 +596,23 @@
       </div>
 
       <!-- Token strip -->
-      <div class="mt-10 neon-card rounded-2xl p-5 sm:p-7 reveal">
+      <div class="mt-10 neon-card rounded-2xl p-5 sm:p-7 reveal overflow-hidden">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-center">
-          <div>
+          <div class="min-w-0">
             <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">Name</p>
             <p class="text-lg sm:text-xl font-black neon-text">Octen</p>
           </div>
-          <div>
+          <div class="min-w-0">
             <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">Symbol</p>
             <p class="text-lg sm:text-xl font-black neon-text">$Octen</p>
           </div>
-          <div>
+          <div class="min-w-0">
             <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">Chain</p>
             <p class="text-lg sm:text-xl font-black neon-text">Solana</p>
           </div>
-          <div>
+          <div class="min-w-0">
             <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">CA</p>
-            <p class="text-lg sm:text-xl font-black neon-text">7z4cgsb7egGx4iWXioU5agYP2cU5tyoXZakSCxafpump</p>
+            <p class="text-xs sm:text-sm font-mono font-bold neon-text truncate" title="7z4cgsb7egGx4iWXioU5agYP2cU5tyoXZakSCxafpump">7z4cgsb7egGx4iWXioU5agYP2cU5tyoXZakSCxafpump</p>
           </div>
         </div>
       </div>
