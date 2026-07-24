@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$Octen — Wrong Coin at $40K</title>
+  <meta name="description" content="Octen ($Octen) — Wrong coin at $40K. Check the commits. Three devs. We bonded one guy… hello???" />
+  <meta property="og:title" content="$Octen — Wrong Coin at $40K" />
+  <meta property="og:description" content="Check the commits. There are three devs involved. We bonded one guy… hello???" />
+  <meta property="og:image" content="banner.png" />
+  <link rel="icon" href="logo.png" type="image/png" />
+
+  <!-- Font matches banner.png: bold rounded geometric sans with neon weight -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            exo: ['"Exo 2"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            neon: {
+              50:  '#e6ffe6',
+              100: '#b3ffb3',
+              200: '#80ff80',
+              300: '#4dff4d',
+              400: '#1aff1a',
+              500: '#00ff66',
+              600: '#00e65c',
+              700: '#00cc52',
+              800: '#00993d',
+              900: '#006629',
+            },
+            void: {
+              950: '#020805',
+              900: '#041008',
+              800: '#071a0e',
+              700: '#0a2414',
+              600: '#0e301c',
+            }
+          },
+          boxShadow: {
+            neon: '0 0 20px rgba(0,255,102,0.45), 0 0 60px rgba(0,255,102,0.2)',
+            'neon-lg': '0 0 30px rgba(0,255,102,0.55), 0 0 90px rgba(0,255,102,0.25), 0 0 140px rgba(0,255,102,0.12)',
+            'neon-btn': '0 0 16px rgba(0,255,102,0.5), 0 0 40px rgba(0,255,102,0.25)',
+            'inner-neon': 'inset 0 0 40px rgba(0,255,102,0.08)',
+          },
+          animation: {
+            'pulse-neon': 'pulseNeon 2.4s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'grid-move': 'gridMove 20s linear infinite',
+            'glitch': 'glitch 4s infinite',
+            'scan': 'scan 8s linear infinite',
+            'fade-up': 'fadeUp 0.8s ease-out both',
+          },
+          keyframes: {
+            pulseNeon: {
+              '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 12px rgba(0,255,102,0.8))' },
+              '50%': { opacity: '0.85', filter: 'drop-shadow(0 0 28px rgba(0,255,102,1))' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            gridMove: {
+              '0%': { backgroundPosition: '0 0' },
+              '100%': { backgroundPosition: '0 80px' },
+            },
+            glitch: {
+              '0%, 90%, 100%': { transform: 'translate(0)' },
+              '92%': { transform: 'translate(-2px, 1px)' },
+              '94%': { transform: 'translate(2px, -1px)' },
+              '96%': { transform: 'translate(-1px, 2px)' },
+            },
+            scan: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100vh)' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --neon: #00ff66;
+      --neon-dim: rgba(0, 255, 102, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Exo 2', system-ui, sans-serif;
+      background: #020805;
+      color: #e8ffe8;
+      overflow-x: hidden;
+    }
+
+    /* Cyber grid floor + vignette */
+    .cyber-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 255, 102, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 180, 80, 0.08), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 15% 80%, rgba(0, 255, 102, 0.06), transparent 50%),
+        linear-gradient(180deg, #020805 0%, #041008 40%, #020805 100%);
+    }
+
+    .grid-floor {
+      background-image:
+        linear-gradient(rgba(0, 255, 102, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 102, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, transparent, black 20%, black 70%, transparent);
+      animation: gridMove 18s linear infinite;
+    }
+
+    @keyframes gridMove {
+      from { background-position: 0 0; }
+      to { background-position: 0 48px; }
+    }
+
+    /* Neon text glow matching banner */
+    .neon-text {
+      color: #ffffff;
+      text-shadow:
+        0 0 8px rgba(0, 255, 102, 0.95),
+        0 0 24px rgba(0, 255, 102, 0.7),
+        0 0 48px rgba(0, 255, 102, 0.45),
+        0 0 80px rgba(0, 255, 102, 0.25);
+    }
+
+    .neon-text-green {
+      color: #00ff66;
+      text-shadow:
+        0 0 8px rgba(0, 255, 102, 0.9),
+        0 0 22px rgba(0, 255, 102, 0.55),
+        0 0 44px rgba(0, 255, 102, 0.3);
+    }
+
+    /* Logo treatment — new neon frame style */
+    .logo-ring {
+      position: relative;
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(from 0deg, #00ff66, #003d1f, #00ff66, #004d24, #00ff66);
+      animation: spinSlow 8s linear infinite;
+    }
+
+    .logo-ring-inner {
+      border-radius: 50%;
+      background: #020805;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes spinSlow {
+      to { transform: rotate(360deg); }
+    }
+
+    .logo-glow {
+      filter: drop-shadow(0 0 16px rgba(0, 255, 102, 0.85))
+              drop-shadow(0 0 40px rgba(0, 255, 102, 0.45));
+    }
+
+    .logo-hero-wrap {
+      position: relative;
+    }
+
+    .logo-hero-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle, rgba(0, 255, 102, 0.35) 0%, transparent 65%);
+      animation: pulseNeon 2.8s ease-in-out infinite;
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    @keyframes pulseNeon {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    /* Glass / neon cards */
+    .neon-card {
+      background: linear-gradient(145deg, rgba(0, 255, 102, 0.06), rgba(0, 20, 10, 0.7));
+      border: 1px solid rgba(0, 255, 102, 0.28);
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 102, 0.05),
+        0 8px 40px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(0, 255, 102, 0.12);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .neon-card:hover {
+      border-color: rgba(0, 255, 102, 0.55);
+      box-shadow:
+        0 0 30px rgba(0, 255, 102, 0.18),
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(0, 255, 102, 0.2);
+      transform: translateY(-4px);
+    }
+
+    /* Buttons */
+    .btn-neon {
+      background: linear-gradient(135deg, #00ff66 0%, #00cc52 50%, #00e65c 100%);
+      color: #021006;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.45), 0 4px 16px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    }
+
+    .btn-neon:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 36px rgba(0, 255, 102, 0.65), 0 8px 24px rgba(0, 0, 0, 0.45);
+      filter: brightness(1.08);
+    }
+
+    .btn-outline-neon {
+      background: transparent;
+      color: #00ff66;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      border: 2px solid rgba(0, 255, 102, 0.7);
+      box-shadow: 0 0 16px rgba(0, 255, 102, 0.2), inset 0 0 20px rgba(0, 255, 102, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .btn-outline-neon:hover {
+      background: rgba(0, 255, 102, 0.12);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 28px rgba(0, 255, 102, 0.4);
+    }
+
+    /* Step number badge */
+    .step-num {
+      background: linear-gradient(135deg, #00ff66, #00993d);
+      color: #021006;
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.5);
+    }
+
+    /* CA box */
+    .ca-box {
+      background: rgba(0, 20, 10, 0.85);
+      border: 1px solid rgba(0, 255, 102, 0.35);
+      box-shadow: inset 0 0 30px rgba(0, 255, 102, 0.06), 0 0 20px rgba(0, 255, 102, 0.1);
+    }
+
+    /* Scanline overlay */
+    .scanlines::after {
+      content: '';
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
+      );
+      z-index: 50;
+      opacity: 0.35;
+    }
+
+    /* Horizontal neon divider */
+    .neon-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #00ff66, transparent);
+      box-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+    }
+
+    /* Nav blur */
+    .nav-glass {
+      background: rgba(2, 8, 5, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 255, 102, 0.18);
+    }
+
+    /* Dex embed frame */
+    .dex-frame {
+      border: 1px solid rgba(0, 255, 102, 0.3);
+      box-shadow: 0 0 40px rgba(0, 255, 102, 0.12), inset 0 0 40px rgba(0, 255, 102, 0.04);
+      background: #0a0f0c;
+    }
+
+    /* Social icon buttons */
+    .social-btn {
+      transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.35));
+    }
+
+    .social-btn:hover {
+      transform: scale(1.12) translateY(-2px);
+      filter: drop-shadow(0 0 16px rgba(0, 255, 102, 0.8));
+    }
+
+    /* Banner image treatment */
+    .banner-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 255, 102, 0.35);
+      box-shadow:
+        0 0 40px rgba(0, 255, 102, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .banner-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(2, 8, 5, 0.85) 100%);
+      pointer-events: none;
+    }
+
+    /* Quote / drama block */
+    .drama-quote {
+      border-left: 3px solid #00ff66;
+      background: linear-gradient(90deg, rgba(0, 255, 102, 0.1), transparent);
+      box-shadow: -4px 0 24px rgba(0, 255, 102, 0.15);
+    }
+
+    /* Copy toast */
+    #copy-toast {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(8px);
+    }
+
+    #copy-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    #mobile-menu.open {
+      max-height: 320px;
+    }
+
+    /* Section reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020805; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00ff66, #00993d);
+      border-radius: 4px;
+    }
+
+    /* X icon invert for dark bg (outline white X) */
+    .x-icon {
+      filter: invert(1) drop-shadow(0 0 6px rgba(0, 255, 102, 0.4));
+    }
+
+    .x-icon:hover {
+      filter: invert(1) drop-shadow(0 0 14px rgba(0, 255, 102, 0.9));
+    }
+  </style>
+</head>
+<body class="cyber-bg scanlines font-exo antialiased">
+
+  <!-- Ambient grid -->
+  <div class="fixed inset-0 grid-floor pointer-events-none z-0 opacity-60" aria-hidden="true"></div>
+
+  <!-- ========== NAV ========== -->
+  <nav class="fixed top-0 inset-x-0 z-40 nav-glass">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16 sm:h-18">
+        <!-- Brand -->
+        <a href="#home" class="flex items-center gap-2.5 group">
+          <div class="relative w-10 h-10 sm:w-11 sm:h-11">
+            <div class="absolute inset-0 rounded-full bg-neon-500/30 blur-md group-hover:bg-neon-500/50 transition"></div>
+            <img src="logo.png" alt="Octen logo" class="relative w-full h-full object-contain logo-glow rounded-full" />
+          </div>
+          <span class="text-xl sm:text-2xl font-black tracking-tight neon-text">Octen</span>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-7 text-sm font-semibold tracking-wide text-neon-100/80">
+          <a href="#about" class="hover:text-neon-500 transition">About</a>
+          <a href="#how-to-buy" class="hover:text-neon-500 transition">How to Buy</a>
+          <a href="#chart" class="hover:text-neon-500 transition">Chart</a>
+          <a href="#community" class="hover:text-neon-500 transition">Community</a>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-3">
+          <a href="https://t.me/OctenSol" target="_blank" rel="noopener noreferrer" class="social-btn hidden sm:block" aria-label="Telegram">
+            <img src="tg.png" alt="Telegram" class="w-9 h-9 rounded-full" />
+          </a>
+          <a href="https://x.com/OctenSol" target="_blank" rel="noopener noreferrer" class="social-btn hidden sm:block" aria-label="X / Twitter">
+            <img src="x.png" alt="X" class="w-8 h-8 x-icon" />
+          </a>
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-neon px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm uppercase">
+            Buy Now
+          </a>
+          <button id="menu-btn" class="md:hidden p-2 text-neon-500" aria-label="Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="md:hidden border-t border-neon-500/20">
+        <div class="flex flex-col gap-1 py-3 text-sm font-semibold">
+          <a href="#about" class="px-2 py-2.5 rounded-lg hover:bg-neon-500/10 hover:text-neon-500 transition">About</a>
+          <a href="#how-to-buy" class="px-2 py-2.5 rounded-lg hover:bg-neon-500/10 hover:text-neon-500 transition">How to Buy</a>
+          <a href="#chart" class="px-2 py-2.5 rounded-lg hover:bg-neon-500/10 hover:text-neon-500 transition">Chart</a>
+          <a href="#community" class="px-2 py-2.5 rounded-lg hover:bg-neon-500/10 hover:text-neon-500 transition">Community</a>
+          <div class="flex items-center gap-4 px-2 pt-2">
+            <a href="https://t.me/OctenSol" target="_blank" rel="noopener noreferrer">
+              <img src="tg.png" alt="Telegram" class="w-9 h-9 rounded-full social-btn" />
+            </a>
+            <a href="https://x.com/OctenSol" target="_blank" rel="noopener noreferrer">
+              <img src="x.png" alt="X" class="w-8 h-8 x-icon social-btn" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <header id="home" class="relative z-10 pt-24 sm:pt-28 pb-12 sm:pb-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Banner -->
+      <div class="banner-wrap reveal mb-10 sm:mb-14">
+        <img src="banner.png" alt="Octen banner" class="w-full h-auto object-cover max-h-[280px] sm:max-h-[360px]" />
+      </div>
+
+      <div class="grid lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-14 items-center">
+        <!-- Logo hero -->
+        <div class="flex flex-col items-center reveal">
+          <div class="logo-hero-wrap animate-float">
+            <div class="logo-ring w-44 h-44 sm:w-56 sm:h-56 p-[3px]">
+              <div class="logo-ring-inner w-full h-full">
+                <img src="logo.png" alt="Octen" class="w-full h-full object-contain logo-glow rounded-full" />
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 text-center">
+            <p class="text-neon-500/70 text-xs sm:text-sm font-bold tracking-[0.35em] uppercase mb-1">Solana Meme</p>
+            <h1 class="text-5xl sm:text-6xl font-black neon-text tracking-tight">$Octen</h1>
+            <p class="mt-1 text-neon-300/80 font-semibold tracking-widest text-sm">Symbol: Octen</p>
+          </div>
+        </div>
+
+        <!-- Hero copy + CTAs -->
+        <div class="reveal space-y-6">
+          <div class="drama-quote rounded-r-xl pl-5 pr-4 py-4">
+            <p class="text-lg sm:text-xl md:text-2xl font-extrabold leading-snug neon-text">
+              “Wrong coin at $40K — check the commits.”
+            </p>
+            <p class="mt-3 text-base sm:text-lg text-neon-100/85 font-medium leading-relaxed">
+              There are <span class="text-neon-500 font-bold">three devs</span> involved.
+              We bonded one guy…
+              <span class="neon-text-green font-black">hello???</span>
+            </p>
+          </div>
+
+          <p class="text-neon-100/70 text-sm sm:text-base leading-relaxed max-w-xl">
+            $Octen is the neon octopus rising from the grid. On-chain receipts don’t lie —
+            the commits are public, the bond is real, and the chart is loading.
+            Don’t ape the wrong coin again.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap gap-3 sm:gap-4">
+            <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA"
+               target="_blank" rel="noopener noreferrer"
+               class="btn-neon inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm sm:text-base uppercase">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              Buy Now
+            </a>
+            <a href="https://dexscreener.com/solana/TBA"
+               target="_blank" rel="noopener noreferrer"
+               class="btn-outline-neon inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm sm:text-base uppercase">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+              Chart
+            </a>
+          </div>
+
+          <!-- Contract Address -->
+          <div class="ca-box rounded-2xl p-4 sm:p-5">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-neon-500">Contract Address</span>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neon-500/15 text-neon-400 border border-neon-500/30">Solana</span>
+            </div>
+            <div class="flex items-center gap-2 sm:gap-3">
+              <code id="ca-text" class="flex-1 text-xs sm:text-sm font-mono text-neon-100/90 truncate select-all">TBA</code>
+              <button id="copy-btn" type="button"
+                      class="shrink-0 btn-outline-neon px-3.5 py-2 rounded-xl text-xs uppercase flex items-center gap-1.5"
+                      aria-label="Copy contract address">
+                <svg id="copy-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                <span id="copy-label">Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="neon-line max-w-4xl mx-auto opacity-60"></div>
+
+  <!-- ========== ABOUT / LORE ========== -->
+  <section id="about" class="relative z-10 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 reveal">
+        <p class="text-neon-500 text-xs font-bold tracking-[0.3em] uppercase mb-2">The Lore</p>
+        <h2 class="text-3xl sm:text-5xl font-black neon-text">Wrong Coin. Real Drama.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 sm:gap-6">
+        <article class="neon-card rounded-2xl p-6 reveal">
+          <div class="w-12 h-12 rounded-xl bg-neon-500/15 border border-neon-500/30 flex items-center justify-center mb-4">
+            <span class="text-2xl">💸</span>
+          </div>
+          <h3 class="text-lg font-extrabold neon-text-green mb-2">Wrong Coin at $40K</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Someone hit the wrong ticker. Bags went sideways at forty grand.
+            $Octen is the correction — neon, verified, and on Solana.
+          </p>
+        </article>
+
+        <article class="neon-card rounded-2xl p-6 reveal">
+          <div class="w-12 h-12 rounded-xl bg-neon-500/15 border border-neon-500/30 flex items-center justify-center mb-4">
+            <span class="text-2xl">🧾</span>
+          </div>
+          <h3 class="text-lg font-extrabold neon-text-green mb-2">Check the Commits</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Receipts live on-chain and in the repo. Three fingerprints.
+            Don’t trust vibes — read the history. The octopus doesn’t hide.
+          </p>
+        </article>
+
+        <article class="neon-card rounded-2xl p-6 reveal">
+          <div class="w-12 h-12 rounded-xl bg-neon-500/15 border border-neon-500/30 flex items-center justify-center mb-4">
+            <span class="text-2xl">🤝</span>
+          </div>
+          <h3 class="text-lg font-extrabold neon-text-green mb-2">We Bonded One Guy…</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Three devs. One got bonded. Liquidity locked energy.
+            Hello??? If you know, you know. If you don’t — buy $Octen.
+          </p>
+        </article>
+      </div>
+
+      <!-- Token strip -->
+      <div class="mt-10 neon-card rounded-2xl p-5 sm:p-7 reveal">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-center">
+          <div>
+            <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">Name</p>
+            <p class="text-lg sm:text-xl font-black neon-text">Octen</p>
+          </div>
+          <div>
+            <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">Symbol</p>
+            <p class="text-lg sm:text-xl font-black neon-text">$Octen</p>
+          </div>
+          <div>
+            <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">Chain</p>
+            <p class="text-lg sm:text-xl font-black neon-text">Solana</p>
+          </div>
+          <div>
+            <p class="text-[11px] tracking-widest uppercase text-neon-500/80 font-bold mb-1">CA</p>
+            <p class="text-lg sm:text-xl font-black neon-text">TBA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-line max-w-4xl mx-auto opacity-60"></div>
+
+  <!-- ========== HOW TO BUY ========== -->
+  <section id="how-to-buy" class="relative z-10 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14 reveal">
+        <p class="text-neon-500 text-xs font-bold tracking-[0.3em] uppercase mb-2">Get In</p>
+        <h2 class="text-3xl sm:text-5xl font-black neon-text">How to Buy $Octen</h2>
+        <p class="mt-3 text-neon-100/65 max-w-xl mx-auto text-sm sm:text-base">
+          Four steps. Solana only. No wrong-coin energy this time.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <!-- Step 1 -->
+        <div class="neon-card rounded-2xl p-6 relative reveal">
+          <div class="step-num w-10 h-10 rounded-full flex items-center justify-center font-black text-lg mb-5">1</div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Get a Wallet</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Install <span class="text-neon-400 font-semibold">Phantom</span> or
+            <span class="text-neon-400 font-semibold">Solflare</span>.
+            Create a wallet and back up your seed phrase offline. Never share it.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="neon-card rounded-2xl p-6 relative reveal">
+          <div class="step-num w-10 h-10 rounded-full flex items-center justify-center font-black text-lg mb-5">2</div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Fund with SOL</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Buy SOL on an exchange (Binance, Coinbase, etc.) and withdraw it to your
+            Solana wallet address. Keep a little extra for fees.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="neon-card rounded-2xl p-6 relative reveal">
+          <div class="step-num w-10 h-10 rounded-full flex items-center justify-center font-black text-lg mb-5">3</div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Open the Swap</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Hit <span class="text-neon-400 font-semibold">Buy Now</span> or open pump.fun swap.
+            Paste the $Octen CA when live. Double-check — no wrong coin at $40K.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="neon-card rounded-2xl p-6 relative reveal">
+          <div class="step-num w-10 h-10 rounded-full flex items-center justify-center font-black text-lg mb-5">4</div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Swap SOL → $Octen</h3>
+          <p class="text-sm text-neon-100/70 leading-relaxed">
+            Connect wallet, set amount, confirm the swap. You’re in.
+            Then open the chart and join Telegram. Hello???
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap justify-center gap-3 sm:gap-4 reveal">
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-neon px-8 py-3.5 rounded-full text-sm sm:text-base uppercase">
+          Buy $Octen Now
+        </a>
+        <a href="https://dexscreener.com/solana/TBA"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-outline-neon px-8 py-3.5 rounded-full text-sm sm:text-base uppercase">
+          View Chart
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-line max-w-4xl mx-auto opacity-60"></div>
+
+  <!-- ========== CHART / DEXSCREENER ========== -->
+  <section id="chart" class="relative z-10 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 reveal">
+        <p class="text-neon-500 text-xs font-bold tracking-[0.3em] uppercase mb-2">Live Feed</p>
+        <h2 class="text-3xl sm:text-5xl font-black neon-text">Chart</h2>
+        <p class="mt-3 text-neon-100/65 text-sm sm:text-base">
+          Dexscreener embed — watch $Octen move in real time.
+        </p>
+      </div>
+
+      <div class="dex-frame rounded-2xl overflow-hidden reveal" style="height: 560px;">
+        <iframe
+          title="Octen Dexscreener Chart"
+          src="https://dexscreener.com/solana/TBA?embed=1&theme=dark&trades=0&info=0"
+          class="w-full h-full border-0"
+          loading="lazy"
+          allow="clipboard-write"
+        ></iframe>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-center gap-3 reveal">
+        <a href="https://dexscreener.com/solana/TBA"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-outline-neon px-6 py-3 rounded-full text-xs sm:text-sm uppercase">
+          Open on Dexscreener ↗
+        </a>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-neon px-6 py-3 rounded-full text-xs sm:text-sm uppercase">
+          Buy on Pump Swap
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-line max-w-4xl mx-auto opacity-60"></div>
+
+  <!-- ========== COMMUNITY ========== -->
+  <section id="community" class="relative z-10 py-16 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12 reveal">
+        <p class="text-neon-500 text-xs font-bold tracking-[0.3em] uppercase mb-2">Stay Plugged In</p>
+        <h2 class="text-3xl sm:text-5xl font-black neon-text">Community</h2>
+        <p class="mt-3 text-neon-100/65 max-w-lg mx-auto text-sm sm:text-base">
+          Commits, bonds, and chaos — join the neon grid.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 max-w-3xl mx-auto">
+        <a href="https://t.me/OctenSol" target="_blank" rel="noopener noreferrer"
+           class="neon-card rounded-2xl p-7 sm:p-8 flex flex-col items-center text-center group reveal">
+          <div class="relative mb-5">
+            <div class="absolute inset-0 rounded-full bg-[#29b6f6]/30 blur-xl group-hover:bg-[#29b6f6]/50 transition"></div>
+            <img src="tg.png" alt="Telegram" class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full social-btn" />
+          </div>
+          <h3 class="text-xl font-extrabold neon-text mb-1">Telegram</h3>
+          <p class="text-sm text-neon-100/60 mb-3">@OctenSol</p>
+          <span class="text-neon-500 text-xs font-bold tracking-widest uppercase group-hover:underline">Join Chat →</span>
+        </a>
+
+        <a href="https://x.com/OctenSol" target="_blank" rel="noopener noreferrer"
+           class="neon-card rounded-2xl p-7 sm:p-8 flex flex-col items-center text-center group reveal">
+          <div class="relative mb-5 flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24">
+            <div class="absolute inset-0 rounded-full bg-white/10 blur-xl group-hover:bg-white/20 transition"></div>
+            <img src="x.png" alt="X / Twitter" class="relative w-14 h-14 sm:w-16 sm:h-16 x-icon social-btn" />
+          </div>
+          <h3 class="text-xl font-extrabold neon-text mb-1">X / Twitter</h3>
+          <p class="text-sm text-neon-100/60 mb-3">@OctenSol</p>
+          <span class="text-neon-500 text-xs font-bold tracking-widest uppercase group-hover:underline">Follow →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="relative z-10 pb-20 sm:pb-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="neon-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden reveal">
+        <div class="absolute inset-0 pointer-events-none opacity-40"
+             style="background: radial-gradient(ellipse at 50% 0%, rgba(0,255,102,0.2), transparent 60%);"></div>
+        <img src="logo.png" alt="" class="w-16 h-16 mx-auto mb-5 logo-glow animate-pulse-neon relative" />
+        <h2 class="text-2xl sm:text-4xl font-black neon-text relative mb-3">
+          Don’t Ape the Wrong Coin.
+        </h2>
+        <p class="text-neon-100/70 max-w-md mx-auto mb-8 relative text-sm sm:text-base">
+          Three devs. One bond. Infinite neon.
+          Check the commits — then buy $Octen.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 relative">
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-neon px-8 py-3.5 rounded-full text-sm uppercase">
+            Buy Now
+          </a>
+          <a href="https://dexscreener.com/solana/TBA"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-outline-neon px-8 py-3.5 rounded-full text-sm uppercase">
+            Chart
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="relative z-10 border-t border-neon-500/15 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <img src="logo.png" alt="Octen" class="w-9 h-9 logo-glow rounded-full" />
+          <div>
+            <p class="font-black neon-text text-lg leading-none">Octen</p>
+            <p class="text-[11px] text-neon-100/50 tracking-wider mt-0.5">$Octen · Solana</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-5">
+          <a href="https://t.me/OctenSol" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Telegram">
+            <img src="tg.png" alt="Telegram" class="w-8 h-8 rounded-full" />
+          </a>
+          <a href="https://x.com/OctenSol" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X">
+            <img src="x.png" alt="X" class="w-7 h-7 x-icon" />
+          </a>
+        </div>
+
+        <p class="text-[11px] text-neon-100/40 text-center sm:text-right max-w-xs leading-relaxed">
+          $Octen is a meme coin with no intrinsic value or expectation of financial return.
+          DYOR. NFA.
+        </p>
+      </div>
+      <div class="neon-line mt-8 mb-4 opacity-40"></div>
+      <p class="text-center text-[11px] text-neon-100/35 tracking-wide">
+        © <span id="year"></span> Octen. Wrong coin at $40K — check the commits.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Copy toast -->
+  <div id="copy-toast"
+       class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-full
+              bg-neon-500 text-void-950 text-sm font-extrabold shadow-neon-btn">
+    CA copied ✓
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // Copy CA
+    const copyBtn = document.getElementById('copy-btn');
+    const caText = document.getElementById('ca-text');
+    const copyLabel = document.getElementById('copy-label');
+    const toast = document.getElementById('copy-toast');
+
+    async function copyCA() {
+      const value = caText.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        const range = document.createRange();
+        range.selectNode(caText);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        sel.removeAllRanges();
+      }
+      copyLabel.textContent = 'Copied!';
+      toast.classList.add('show');
+      setTimeout(() => {
+        copyLabel.textContent = 'Copy';
+        toast.classList.remove('show');
+      }, 1800);
+    }
+
+    copyBtn?.addEventListener('click', copyCA);
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    reveals.forEach((el) => io.observe(el));
+
+    // Stagger first visible reveals slightly
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min(i % 4, 3) * 0.08}s`;
+    });
+  </script>
+</body>
+</html>
